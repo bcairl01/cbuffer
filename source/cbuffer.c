@@ -15,7 +15,7 @@
 
 /// @brief 	Initializes support structure
 ///	@param 	buf_p		pointer to buffer.
-void buffer_init( buffer* buf_p )
+void buffer_init( cbuffer* buf_p )
 {
 	buf_p->rd_idx 		= 
 	buf_p->wr_idx 		= 
@@ -29,7 +29,7 @@ void buffer_init( buffer* buf_p )
 
 /// @brief 	Zeros available buffer space
 ///	@param 	buf_p		pointer to buffer.
-void buffer_clear( buffer* buf_p )
+void buffer_clear( cbuffer* buf_p )
 {
 	if(buf_p->data)
 	{
@@ -44,7 +44,7 @@ void buffer_clear( buffer* buf_p )
 /// @brief 	Allocates buffer space
 ///	@param 	buf_p		pointer to buffer.
 /// @param 	cap 		buffer capacity
-void buffer_alloc( buffer* buf_p, size_t cap )
+void buffer_alloc( cbuffer* buf_p, size_t cap )
 {
 	buf_p->capacity = cap;
 	buf_p->data 	= (uint8_t*)malloc(cap*sizeof(uint8_t));
@@ -56,7 +56,7 @@ void buffer_alloc( buffer* buf_p, size_t cap )
 
 /// @brief 	Frees allocated buffer space
 ///	@param 	buf_p		pointer to buffer.
-void buffer_free( buffer* buf_p )
+void buffer_free( cbuffer* buf_p )
 {
 	buf_p->capacity = 0;
 	free(buf_p->data);
@@ -69,7 +69,7 @@ void buffer_free( buffer* buf_p )
 ///	@param 	buf_p		pointer to buffer.
 /// @param 	byte_in 	byte to add
 /// @return '1' upon success
-uint8_t buffer_set( buffer* buf_p, uint8_t byte_in )
+uint8_t buffer_put( cbuffer* buf_p, uint8_t byte_in )
 {
 	if( BUFFER_GET_SIZE(buf_p) < buf_p->capacity )
 	{
@@ -87,7 +87,7 @@ uint8_t buffer_set( buffer* buf_p, uint8_t byte_in )
 ///	@param 	buf_p		pointer to buffer.
 /// @param 	byte_out 	output byte
 /// @return '1' upon success
-uint8_t buffer_get( buffer* buf_p, uint8_t* byte_out )
+uint8_t buffer_get( cbuffer* buf_p, uint8_t* byte_out )
 {	
 	if( BUFFER_GET_SIZE(buf_p) )
 	{

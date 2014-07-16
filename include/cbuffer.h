@@ -1,8 +1,8 @@
 #ifndef CBUFFER_H
 #define CBUFFER_H
 
+#include <stdlib.h>
 #include <stdint.h>
-#include <memory.h>
 
 /// @brief 	Generic Ring-Buffer Structure
 /// @var 	capacity 		size of allocated buffer space
@@ -19,13 +19,15 @@ typedef struct
 	uint16_t 				size;
 	uint8_t*				data;
 	uint8_t					overflow;
-} buffer;
+} cbuffer;
 
-void 	buffer_init( buffer* buf_p );
-void 	buffer_clear( buffer* buf_p );
-void 	buffer_alloc( buffer* buf_p, size_t cap );
-void 	buffer_free( buffer* buf_p );
-uint8_t buffer_set( buffer* buf_p, uint8_t byte_in );
-uint8_t buffer_get( buffer* buf_p, uint8_t* byte_out );
+#define BUFFER_OK(buf_p) 	(buf_p && buf_p->data && buf_p->cap && !buf_p->overflow)
+
+void 	buffer_init( cbuffer* buf_p );
+void 	buffer_clear( cbuffer* buf_p );
+void 	buffer_alloc( cbuffer* buf_p, size_t cap );
+void 	buffer_free( cbuffer* buf_p );
+uint8_t buffer_put( cbuffer* buf_p, uint8_t byte_in );
+uint8_t buffer_get( cbuffer* buf_p, uint8_t* byte_out );
 
 #endif
