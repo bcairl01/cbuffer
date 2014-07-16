@@ -1,6 +1,9 @@
 #ifndef CBUFFER_H
 #define CBUFFER_H
 
+#include <stdint.h>
+#include <memory.h>
+
 /// @brief 	Generic Ring-Buffer Structure
 /// @var 	capacity 		size of allocated buffer space
 /// @var	rd_idx			next slot in buffer to read from
